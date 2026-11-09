@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ing. Especialista en Análisis de Datos & Estrategia Política</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts inspirados en ConcordW00 Medium (Semi-bold corporativo) y Light -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- FontAwesome para iconos limpios -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        navy900: '#0b1329',
+                        navy800: '#111c3a',
+                        gold600: '#c5a059',
+                        gold500: '#d4af37',
+                        slate50: '#f8fafc',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+        }
+        h1, h2, h3, h4, h5, h6, .font-heading {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+        .light-custom {
+            font-weight: 300;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-navy900 text-slate-800 dark:text-slate-100 antialiased selection:bg-gold600 selection:text-white transition-colors duration-300">
+
+    <!-- Notificación flotante personalizada (Toast) -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-navy900 dark:bg-gold600 text-white px-5 py-3 rounded-xl shadow-2xl flex items-center space-x-3 border border-gold600/30">
+        <i class="fa-solid fa-circle-check text-gold500 dark:text-white"></i>
+        <span id="toast-message" class="text-sm font-medium">Información copiada al portapapeles</span>
+    </div>
+
+    <!-- Barra de Navegación Superior -->
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-white/80 dark:bg-navy900/80 border-b border-slate-200 dark:border-slate-800 transition-colors">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-navy900 dark:bg-gold600 text-white flex items-center justify-center font-heading font-bold tracking-wider text-lg shadow-md">
+                    AD
+                </div>
+                <div>
+                    <span class="block text-sm font-heading font-bold tracking-tight text-slate-900 dark:text-white">Ing. Análisis de Datos</span>
+                    <span class="block text-xs text-slate-500 dark:text-slate-400 light-custom">Estrategia & Estadística</span>
+                </div>
+            </div>
+            
+            <nav class="hidden lg:flex items-center space-x-8 text-sm font-medium text-slate-600 dark:text-slate-300">
+                <a href="#resumen" class="hover:text-gold600 dark:hover:text-gold500 transition-colors">Resumen</a>
+                <a href="#experiencia" class="hover:text-gold600 dark:hover:text-gold500 transition-colors">Experiencia</a>
+                <a href="#habilidades" class="hover:text-gold600 dark:hover:text-gold500 transition-colors">Habilidades</a>
+                <a href="#portafolio" class="hover:text-gold600 dark:hover:text-gold500 transition-colors">Portafolio (54 Proyectos)</a>
+                <a href="#medios" class="hover:text-gold600 dark:hover:text-gold500 transition-colors">Medios</a>
+                <a href="#formacion" class="hover:text-gold600 dark:hover:text-gold500 transition-colors">Formación</a>
+            </nav>
+
+            <div class="flex items-center space-x-3">
+                <button onclick="toggleDarkMode()" aria-label="Cambiar Tema" class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-navy800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all flex items-center justify-center">
+                    <i class="fa-solid fa-moon dark:hidden"></i>
+                    <i class="fa-solid fa-sun hidden dark:inline text-gold500"></i>
+                </button>
+                <button onclick="copyContactInfo()" class="bg-navy900 dark:bg-gold600 hover:bg-navy800 dark:hover:bg-gold500 text-white text-sm px-4 py-2 rounded-xl transition-all shadow-sm flex items-center space-x-2">
+                    <i class="fa-regular fa-copy"></i>
+                    <span class="hidden sm:inline">Contacto</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative py-20 lg:py-28 overflow-hidden bg-gradient-to-b from-white to-slate-100 dark:from-navy900 dark:to-navy800 border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="max-w-3xl">
+                <div class="inline-flex items-center space-x-2 bg-gold600/10 text-gold600 dark:text-gold500 px-3.5 py-1.5 rounded-full text-xs font-semibold mb-6 border border-gold600/20">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Ingeniero Industrial & Data Scientist</span>
+                </div>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold tracking-tight text-slate-900 dark:text-white mb-6 leading-tight">
+                    Optimización estratégica basada en <span class="text-gold600 dark:text-gold500">estadística avanzada y datos</span>.
+                </h1>
+                <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-300 light-custom mb-8 leading-relaxed">
+                    Especialista en la aplicación de modelos estadísticos, demoscopia, Six Sigma Black Belt y analítica avanzada para campañas electorales, políticas públicas y mejora de procesos industriales.
+                </p>
+
+                <!-- Datos de Contacto directos -->
+                <div class="flex flex-wrap gap-4 mb-10 text-sm">
+                    <a href="mailto:indicadorel@gmail.com" class="bg-white dark:bg-navy800 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 px-4 py-2.5 rounded-xl flex items-center space-x-2 hover:border-gold600 transition-all shadow-sm">
+                        <i class="fa-regular fa-envelope text-gold600 dark:text-gold500"></i>
+                        <span>indicadorel@gmail.com</span>
+                    </a>
+                    <a href="tel:6182958258" class="bg-white dark:bg-navy800 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 px-4 py-2.5 rounded-xl flex items-center space-x-2 hover:border-gold600 transition-all shadow-sm">
+                        <i class="fa-solid fa-phone text-gold600 dark:text-gold500"></i>
+                        <span>618 2 95 82 58</span>
+                    </a>
+                </div>
+
+                <div class="flex flex-wrap gap-4 text-sm">
+                    <a href="#portafolio" class="bg-gold600 hover:bg-gold500 text-navy900 font-bold px-6 py-3 rounded-xl transition-all shadow-lg shadow-gold600/20 flex items-center space-x-2">
+                        <i class="fa-solid fa-folder-open"></i>
+                        <span>Explorar Portafolio (54 Proyectos)</span>
+                    </a>
+                    <a href="#experiencia" class="bg-white dark:bg-navy800 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-medium px-6 py-3 rounded-xl transition-all flex items-center space-x-2">
+                        <span>Ver Experiencia Política</span>
+                        <i class="fa-solid fa-arrow-down-long text-gold600 dark:text-gold500"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contenido Principal -->
+    <main class="max-w-7xl mx-auto px-6 py-16 space-y-24">
+
+        <!-- 1. Resumen Ejecutivo -->
+        <section id="resumen" class="scroll-mt-28">
+            <div class="bg-white dark:bg-navy800 border border-slate-200 dark:border-slate-700 rounded-3xl p-8 lg:p-12 shadow-sm">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="w-10 h-10 rounded-xl bg-gold600/10 text-gold600 dark:text-gold500 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-user-tie"></i>
+                    </div>
+                    <h2 class="text-2xl font-heading font-bold text-slate-900 dark:text-white">Resumen Ejecutivo</h2>
+                </div>
+                <p class="text-lg text-slate-700 dark:text-slate-300 light-custom leading-relaxed">
+                    Ingeniero con sólida especialización en la aplicación de estadística avanzada y análisis de datos para la estrategia política, la evaluación de políticas públicas y la mejora continua de procesos. Amplia trayectoria como analista cuantitativo en campañas electorales (presidenciales y estatales) y consultoría internacional. Experto certificado en metodologías <strong class="font-semibold text-slate-900 dark:text-white">Six Sigma Black Belt</strong>, análisis demoscópico y desarrollo de modelos en lenguajes de programación como Python y R.
+                </p>
+            </div>
+        </section>
+
+        <!-- 2. Experiencia Clave en Estrategia y Liderazgo Político -->
+        <section id="experiencia" class="scroll-mt-28">
+            <div class="flex items-center space-x-3 mb-10">
+                <div class="w-10 h-10 rounded-xl bg-gold600/10 text-gold600 dark:text-gold500 flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-chess"></i>
+                </div>
+                <h2 class="text-2xl font-heading font-bold text-slate-900 dark:text-white">Experiencia Clave en Estrategia y Liderazgo Político</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white dark:bg-navy800 border border-slate-200 dark:border-slate-700 rounded-3xl p-6 lg:p-8 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-gold600/10 text-gold600 dark:text-gold500 text-xs font-semibold px-3 py-1 rounded-full">Liderazgo Político</span>
+                            <i class="fa-solid fa-landmark text-slate-400"></i>
+                        </div>
+                        <h3 class="text-lg font-heading font-bold text-slate-900 dark:text-white mb-2">Secretario del CDE en Innovación y Tecnología Digital (INTEDI) - PRI</h3>
+                        <p class="text-slate-600 dark:text-slate-300 light-custom text-sm leading-relaxed">
+                            Liderazgo en la aplicación de tecnología, datos e innovación en la estructura estatal del partido para la optimización de estrategias y comunicación digital orientada a resultados medibles.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-700/60 flex items-center text-xs text-slate-500 dark:text-slate-400">
+                        <i class="fa-regular fa-calendar mr-2"></i> Estructura Estatal
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white dark:bg-navy800 border border-slate-200 dark:border-slate-700 rounded-3xl p-6 lg:p-8 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-semibold px-3 py-1 rounded-full">Consultoría Internacional</span>
+                            <i class="fa-solid fa-globe text-slate-400"></i>
+                        </div>
+                        <h3 class="text-lg font-heading font-bold text-slate-900 dark:text-white mb-2">Gobernanza y Poder</h3>
+                        <p class="text-slate-600 dark:text-slate-300 light-custom text-sm leading-relaxed">
+                            Participación como analista senior en proyectos de estrategia electoral y consultoría política internacional, aportando modelos cuantitativos de precisión.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-700/60 flex items-center text-xs text-slate-500 dark:text-slate-400">
+                        <i class="fa-solid fa-handshake mr-2"></i> Consultora Internacional
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white dark:bg-navy800 border border-slate-200 dark:border-slate-700 rounded-3xl p-6 lg:p-8 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-amber-500/10 text-amber-600 dark:text-amber-400 text-xs font-semibold px-3 py-1 rounded-full">Campaña Presidencial</span>
+                            <i class="fa-solid fa-flag text-slate-400"></i>
+                        </div>
+                        <h3 class="text-lg font-heading font-bold text-slate-900 dark:text-white mb-2">Analista de Datos en Campañas Presidenciales (Ecuador)</h3>
+                        <p class="text-slate-600 dark:text-slate-300 light-custom text-sm leading-relaxed">
+                            Aplicación de modelos estadísticos avanzados y análisis de datos electorales para la toma de decisiones estratégicas de alto nivel a escala nacional.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-700/60 flex items-center text-xs text-slate-500 dark:text-slate-400">
+                        <i class="fa-solid fa-location-dot mr-2"></i> Nivel Presidencial • Ecuador
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-white dark:bg-navy800 border border-slate-200 dark:border-slate-700 rounded-3xl p-6 lg:p-8 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-purple-500/10 text-purple-600 dark:text-purple-400 text-xs font-semibold px-3 py-1 rounded-full">Campaña Estatal</span>
+                            <i class="fa-solid fa-chart-pie text-slate-400"></i>
+                        </div>
+                        <h3 class="text-lg font-heading font-bold text-slate-900 dark:text-white mb-2">Analista de Datos en Campañas Estatales (Durango)</h3>
+                        <p class="text-slate-600 dark:text-slate-300 light-custom text-sm leading-relaxed">
+                            Interpretación e implementación de encuestas demoscópicas, análisis de tendencias y procesamiento de datos para la definición de rutas críticas en procesos electorales estatales.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-700/60 flex items-center text-xs text-slate-500 dark:text-slate-400">
+                        <i class="fa-solid fa-location-dot mr-2"></i> Durango, México
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="bg-white dark:bg-navy800 border border-slate-200 dark:border-slate-700 rounded-3xl p-6 lg:p-8 shadow-sm hover:shadow-md transition-shadow md:col-span-2 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-rose-500/10 text-rose-600 dark:text-rose-400 text-xs font-semibold px-3 py-1 rounded-full">Medios & Comunicación</span>
+                            <i class="fa-solid fa-tv text-slate-400"></i>
+                        </div>
+                        <h3 class="text-lg font-heading font-bold text-slate-900 dark:text-white mb-2">Comunicador de Redes Sociales en Canal 12</h3>
+                        <p class="text-slate-600 dark:text-slate-300 light-custom text-sm leading-relaxed">
+                            Aplicación de análisis cuantitativo del mensaje en plataformas digitales y redes sociales para medir impacto, retención y tendencia de la opinión pública en medios de comunicación.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-700/60 flex items-center text-xs text-slate-500 dark:text-slate-400">
+                        <i class="fa-solid fa-signal mr-2"></i> Análisis Cuantitativo de Medios
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Habilidades Clave y Conocimientos Estadísticos -->
+        <section id="habilidades" class="scroll-mt-28">
+            <div class="flex items-center space-x-3 mb-10">
+                <div class="w-10 h-10 rounded-xl bg-gold600/10 text-gold600 dark:text-gold500 flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-brain"></i>
+                </div>
+                <h2 class="text-2xl font-heading font-bold text-slate-900 dark:text-white">Habilidades Clave y Conocimientos Estadísticos</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Skill 1 -->
+                <div class="bg-white dark:bg-navy800 border border-slate-200 dark:border-slate-700 rounded-3xl p-6 shadow-sm">
+                    <div class="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <h3 class="text-lg font-heading font-bold text-slate-900 dark:text-white mb-2">Programación & Modelado</h3>
+                    <p class="text-slate-600 dark:text-slate-300 light-custom text-sm leading-relaxed">
+                        Dominio avanzado de lenguajes <strong>Python</strong> y <strong>R</strong> para limpieza, modelado predictivo, automatización y análisis estadístico masivo.
+                    </p>
+                </div>
+
+                <!-- Skill 2 -->
+                <div class="bg-white dark:bg-navy800 border border-slate-200 dark:border-slate-700 rounded-3xl p-6 shadow-sm">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-calculator"></i>
+                    </div>
+                    <h3 class="text-lg font-heading font-bold text-slate-900 dark:text-white mb-2">Software Estadístico</h3>
+                    <p class="text-slate-600 dark:text-slate-300 light-custom text-sm leading-relaxed">
+                        Manejo profesional de <strong>Minitab</strong>, <strong>SPSS</strong> y <strong>XLStat</strong> para contrastes de hipótesis, diseño de experimentos y estadística inferencial.
+                    </p>
+                </div>
+
+                <!-- Skill 3 -->
+                <div class="bg-white dark:bg-navy800 border border-slate-200 dark:border-slate-700 rounded-3xl p-6 shadow-sm">
+                    <div class="w-12 h-12 rounded-2xl bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-chart-pie"></i>
+                    </div>
+                    <h3 class="text-lg font-heading font-bold text-slate-900 dark:text-white mb-2">Visualización & Storytelling</h3>
+                    <p class="text-slate-600 dark:text-slate-300 light-custom text-sm leading-relaxed">
+                        Creación de gráficos dinámicos e interactivos mediante <strong>DataWrapper</strong>, <strong>Flourish</strong> y <strong>RawGraphs</strong> para la comunicación estratégica de resultados.
+                    </p>
+                </div>
+
+                <!-- Skill 4 -->
+                <div class="bg-white dark:bg-navy800 border border-slate-200 dark:border-slate-700 rounded-3xl p-6 shadow-sm">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-award"></i>
+                    </div>
+                    <h3 class="text-lg font-heading font-bold text-slate-900 dark:text-white mb-2">Six Sigma Black Belt</h3>
+                    <p class="text-slate-600 dark:text-slate-300 light-custom text-sm leading-relaxed">
+                        Certificación Black Belt en gestión de calidad. Implementación de metodologías Lean Six Sigma y establecimiento de KPI's críticos para medición de procesos.
+                    </p>
+                </div>
+
+                <!-- Skill 5 -->
+                <div class="bg-white dark:bg-navy800 border border-slate-200 dark:border-slate-700 rounded-3xl p-6 shadow-sm md:col-span-2">
+                    <div class="w-12 h-12 rounded-2xl bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-map-location-dot"></i>
+                    </div>
+                    <h3 class="text-lg font-heading font-bold text-slate-900 dark:text-white mb-2">Información Geo-estadística</h3>
+                    <p class="text-slate-600 dark:text-slate-300 light-custom text-sm leading-relaxed">
+                        Entrenamiento especializado en gestión y mapeo de información geo-estadística avalado por el <strong>INEGI</strong>, permitiendo análisis territoriales y demográficos de alta precisión.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Portafolio Interactivo con los 54 Proyectos -->
+        <section id="portafolio" class="scroll-mt-28">
+            <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-gold600/10 text-gold600 dark:text-gold500 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-diagram-project"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-heading font-bold text-slate-900 dark:text-white">Portafolio de Análisis & Trabajos</h2>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 light-custom">Colección completa de 54 estudios estadísticos, electorales y de opinión.</p>
+                    </div>
+                </div>
+
+                <!-- Barra de Búsqueda y Filtros -->
+                <div class="flex flex-wrap items-center gap-3">
+                    <div class="relative">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400 text-sm"></i>
+                        <input type="text" id="searchInput" oninput="filterPortfolio()" placeholder="Buscar proyecto (ej. Durango, AMLO, INEGI...)" class="bg-white dark:bg-navy800 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-100 pl-10 pr-4 py-2 rounded-xl text-sm focus:outline-none focus:border-gold600 w-full sm:w-72 shadow-sm">
+                    </div>
+                    <select id="categoryFilter" onchange="filterPortfolio()" class="bg-white dark:bg-navy800 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-100 px-4 py-2 rounded-xl text-sm focus:outline-none focus:border-gold600 shadow-sm">
+                        <option value="all">Todas las plataformas</option>
+                        <option value="x.com">X (Twitter)</option>
+                        <option value="flourish">Flourish (Visualizaciones)</option>
+                        <option value="oem.com.mx">El Sol de Durango / OEM</option>
+                        <option value="ceonline.com.mx">Campaign & Elections</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Grid de Proyectos Generados Dinámicamente (54 elementos) -->
+            <div id="portfolioGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Se llena mediante Script -->
+            </div>
+        </section>
+
+        <!-- 5. Medios y Columnas -->
+        <section id="medios" class="scroll-mt-28">
+            <div class="flex items-center space-x-3 mb-10">
+                <div class="w-10 h-10 rounded-xl bg-gold600/10 text-gold600 dark:text-gold500 flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-newspaper"></i>
+                </div>
+                <h2 class="text-2xl font-heading font-bold text-slate-900 dark:text-white">Medios y Columnas</h2>
+            </div>
+
+            <div class="bg-white dark:bg-navy800 border border-slate-200 dark:border-slate-700 rounded-3xl p-8 lg:p-10 shadow-sm space-y-8">
+                <div class="border-b border-slate-100 dark:border-slate-700 pb-6">
+                    <h3 class="text-lg font-heading font-bold text-slate-900 dark:text-white mb-2">Colaborador en Medios Nacionales e Internacionales</h3>
+                    <p class="text-slate-600 dark:text-slate-300 light-custom text-sm">
+                        Artículos de opinión y menciones como especialista destacado en estadística aplicada al ámbito electoral y financiero.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-slate-50 dark:bg-navy900/50 border border-slate-200 dark:border-slate-700 rounded-2xl p-6">
+                        <div class="text-gold600 dark:text-gold500 font-heading font-bold mb-1">El Financiero</div>
+                        <p class="text-slate-600 dark:text-slate-300 light-custom text-xs">Menciones como especialista en estadística electoral y financiera.</p>
+                    </div>
+                    <div class="bg-slate-50 dark:bg-navy900/50 border border-slate-200 dark:border-slate-700 rounded-2xl p-6">
+                        <div class="text-gold600 dark:text-gold500 font-heading font-bold mb-1">Campaign and Elections</div>
+                        <p class="text-slate-600 dark:text-slate-300 light-custom text-xs">Artículos y análisis sobre estrategia política y consultoría electoral.</p>
+                    </div>
+                    <div class="bg-slate-50 dark:bg-navy900/50 border border-slate-200 dark:border-slate-700 rounded-2xl p-6">
+                        <div class="text-gold600 dark:text-gold500 font-heading font-bold mb-1">El Sol de Durango</div>
+                        <p class="text-slate-600 dark:text-slate-300 light-custom text-xs">Columnista recurrente sobre análisis de datos, estadística y entorno social.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Formación y Capacitación Avanzada -->
+        <section id="formacion" class="scroll-mt-28">
+            <div class="flex items-center space-x-3 mb-10">
+                <div class="w-10 h-10 rounded-xl bg-gold600/10 text-gold600 dark:text-gold500 flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <h2 class="text-2xl font-heading font-bold text-slate-900 dark:text-white">Formación y Capacitación Avanzada</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Form 1 -->
+                <div class="bg-white dark:bg-navy800 border border-slate-200 dark:border-slate-700 rounded-3xl p-6 lg:p-8 shadow-sm flex items-start space-x-4">
+                    <div class="w-12 h-12 rounded-2xl bg-gold600/10 text-gold600 dark:text-gold500 flex items-center justify-center flex-shrink-0 text-lg">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
+                    <div>
+                        <span class="inline-block bg-amber-500/10 text-amber-700 dark:text-amber-400 text-xs font-semibold px-2.5 py-1 rounded-full mb-2">En curso</span>
+                        <h3 class="text-base font-heading font-bold text-slate-900 dark:text-white mb-1">Razonamiento Estadístico para el Análisis de Datos</h3>
+                        <p class="text-slate-600 dark:text-slate-300 light-custom text-sm">Universidad de Columbia • Nueva York</p>
+                    </div>
+                </div>
+
+                <!-- Form 2 -->
+                <div class="bg-white dark:bg-navy800 border border-slate-200 dark:border-slate-700 rounded-3xl p-6 lg:p-8 shadow-sm flex items-start space-x-4">
+                    <div class="w-12 h-12 rounded-2xl bg-gold600/10 text-gold600 dark:text-gold500 flex items-center justify-center flex-shrink-0 text-lg">
+                        <i class="fa-solid fa-landmark"></i>
+                    </div>
+                    <div>
+                        <span class="inline-block bg-amber-500/10 text-amber-700 dark:text-amber-400 text-xs font-semibold px-2.5 py-1 rounded-full mb-2">En curso</span>
+                        <h3 class="text-base font-heading font-bold text-slate-900 dark:text-white mb-1">Evaluación de Políticas Públicas</h3>
+                        <p class="text-slate-600 dark:text-slate-300 light-custom text-sm">Banco Interamericano de Desarrollo (BID)</p>
+                    </div>
+                </div>
+
+                <!-- Form 3 -->
+                <div class="bg-white dark:bg-navy800 border border-slate-200 dark:border-slate-700 rounded-3xl p-6 lg:p-8 shadow-sm flex items-start space-x-4">
+                    <div class="w-12 h-12 rounded-2xl bg-gold600/10 text-gold600 dark:text-gold500 flex items-center justify-center flex-shrink-0 text-lg">
+                        <i class="fa-solid fa-chalkboard-user"></i>
+                    </div>
+                    <div>
+                        <span class="inline-block bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 text-xs font-semibold px-2.5 py-1 rounded-full mb-2">Ponente</span>
+                        <h3 class="text-base font-heading font-bold text-slate-900 dark:text-white mb-1">Estadística Aplicada al Ámbito Empresarial</h3>
+                        <p class="text-slate-600 dark:text-slate-300 light-custom text-sm">Expositor en la Facultad de Ciencias Exactas de la UJED</p>
+                    </div>
+                </div>
+
+                <!-- Form 4 -->
+                <div class="bg-white dark:bg-navy800 border border-slate-200 dark:border-slate-700 rounded-3xl p-6 lg:p-8 shadow-sm flex items-start space-x-4">
+                    <div class="w-12 h-12 rounded-2xl bg-gold600/10 text-gold600 dark:text-gold500 flex items-center justify-center flex-shrink-0 text-lg">
+                        <i class="fa-solid fa-award"></i>
+                    </div>
+                    <div>
+                        <span class="inline-block bg-gold600/10 text-gold600 dark:text-gold500 text-xs font-semibold px-2.5 py-1 rounded-full mb-2">Titulación</span>
+                        <h3 class="text-base font-heading font-bold text-slate-900 dark:text-white mb-1">Ingeniero Industrial en Gestión Integral de la Calidad</h3>
+                        <p class="text-slate-600 dark:text-slate-300 light-custom text-sm">Formación profesional base en mejora continua</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-navy900 border-t border-slate-200 dark:border-slate-800 py-12 mt-24">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between text-sm text-slate-500 dark:text-slate-400">
+            <p>© 2026 • Ing. Industrial & Especialista en Análisis de Datos. Todos los derechos reservados.</p>
+            <div class="flex items-center space-x-6 mt-4 sm:mt-0">
+                <a href="#resumen" class="hover:text-gold600 dark:hover:text-gold500 transition-colors">Volver arriba</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lógica JavaScript para Portafolio (54 proyectos) y Utilidades -->
+    <script>
+        const portfolioData = [
+            { id: 1, title: "Aumento a la canasta básica en la CDMX", url: "https://x.com/ClickDgo/status/1737311954367070683", platform: "x.com" },
+            { id: 2, title: "Análisis de redes sociales rumbo a la presidencia de México", url: "https://x.com/ClickDgo/status/1678429853035515904", platform: "x.com" },
+            { id: 3, title: "Análisis temático sobre 1,500 opiniones del nuevo logo del PAN", url: "https://x.com/ClickDgo/status/1979684949281423471", platform: "x.com" },
+            { id: 4, title: "Simulación electoral para las elecciones legislativas en Argentina", url: "https://x.com/ClickDgo/status/1979297802669953505", platform: "x.com" },
+            { id: 5, title: "Aplicación del algoritmo K-Prototypes para la vivienda de AirBnb en la CDMX", url: "https://x.com/ClickDgo/status/1977167472286703946", platform: "x.com" },
+            { id: 6, title: "Personas desaparecidas en México", url: "https://x.com/ClickDgo/status/1976797095547093203", platform: "x.com" },
+            { id: 7, title: "Gentrificación en la Colonia Roma de la CDMX", url: "https://x.com/ClickDgo/status/1976490977331445846", platform: "x.com" },
+            { id: 8, title: "Promedio de delitos en México (2015-2025)", url: "https://x.com/ClickDgo/status/1976438954728755279", platform: "x.com" },
+            { id: 9, title: "Análisis temático en Facebook sobre Andrés Manuel López Beltrán", url: "https://x.com/ClickDgo/status/1976360238526980216", platform: "x.com" },
+            { id: 10, title: "Análisis electoral de las elecciones presidenciales de México en 2006", url: "https://x.com/ClickDgo/status/1976105523952095673", platform: "x.com" },
+            { id: 11, title: "Correlación entre voto para MORENA y personas con discapacidad en 2024", url: "https://x.com/ClickDgo/status/1975768655968325947", platform: "x.com" },
+            { id: 12, title: "Correlación entre participación electoral y voto hacia MORENA en 2024", url: "https://x.com/ClickDgo/status/1975739986688483827", platform: "x.com" },
+            { id: 13, title: "Aplicación del algoritmo de clasificación K-Means en los resultados electorales de Veracruz en 2025", url: "https://x.com/ClickDgo/status/1975739986688483827", platform: "x.com" },
+            { id: 14, title: "Heatmap correlativo entre delitos de alto impacto durante el sexenio de Claudia Sheinbaum", url: "https://x.com/ClickDgo/status/1975342856807326188", platform: "x.com" },
+            { id: 15, title: "Coropleta de la incidencia delictiva en México", url: "https://x.com/ClickDgo/status/1974955962672062772", platform: "x.com" },
+            { id: 16, title: "MORENA versus PAN en regiones urbanas durante la elección de 2024", url: "https://x.com/ClickDgo/status/1974317081777877493", platform: "x.com" },
+            { id: 17, title: "MORENA y su base de apoyo", url: "https://x.com/ClickDgo/status/1974256484742533325", platform: "x.com" },
+            { id: 18, title: "Análisis temático sobre el documental “PRI: Crónica del fin”", url: "https://x.com/ClickDgo/status/1971351924567089253", platform: "x.com" },
+            { id: 19, title: "Voto hacia MC en la capital de Durango durante las elecciones de 2025", url: "https://x.com/ClickDgo/status/1965547507943137304", platform: "x.com" },
+            { id: 20, title: "Análisis de tendencias electorales", url: "https://x.com/ClickDgo/status/1960106761697853770", platform: "x.com" },
+            { id: 21, title: "Tendencias de narcomenudeo en México", url: "https://x.com/ClickDgo/status/1953535369602883780", platform: "x.com" },
+            { id: 22, title: "Viaje a Japón por parte del hijo de AMLO", url: "https://x.com/ClickDgo/status/1951087448576200880", platform: "x.com" },
+            { id: 23, title: "Nivel de aprobación de Gobernadores en México durante junio de 2025", url: "https://x.com/ClickDgo/status/1948813562803356007", platform: "x.com" },
+            { id: 24, title: "Análisis cualitativo para la cantante Belinda", url: "https://x.com/ClickDgo/status/1947102261970100240", platform: "x.com" },
+            { id: 25, title: "Análisis de redes sociales sobre ataque a PRI y PAN", url: "https://x.com/ClickDgo/status/1943464325303128099", platform: "x.com" },
+            { id: 26, title: "Aplicación del índice de Jacquard", url: "https://x.com/ClickDgo/status/1943531693450657872", platform: "x.com" },
+            { id: 27, title: "Mapeo de interés partidista en Google Trends", url: "https://x.com/ClickDgo/status/1935868245271105791", platform: "x.com" },
+            { id: 28, title: "Coropleta del crecimiento de MC en Durango", url: "https://x.com/ClickDgo/status/1932489744555934189", platform: "x.com" },
+            { id: 29, title: "Anatomía del electorado brasileño", url: "https://x.com/GobernanzaPoder/status/1932252858394767864", platform: "x.com" },
+            { id: 30, title: "Elaboración de estudio digital nacional sobre la elección de la Suprema Corte", url: "https://x.com/GobernanzaPoder/status/1927552421913403511", platform: "x.com" },
+            { id: 31, title: "Tendencias electorales rumbo a las elecciones de alcalde de Durango", url: "https://x.com/ClickDgo/status/1925689264689365456", platform: "x.com" },
+            { id: 32, title: "Estimación para el día 26 de mayo durante las elecciones para alcalde de Durango", url: "https://x.com/ClickDgo/status/1926068512906211596", platform: "x.com" },
+            { id: 33, title: "Fuga morenista de votos durante las elecciones para alcalde de Durango", url: "https://x.com/ClickDgo/status/1926823820716818437", platform: "x.com" },
+            { id: 34, title: "La guerra de encuestas electorales (1era parte)", url: "https://oem.com.mx/elsoldedurango/analisis/la-guerra-deencuestas-electorales-en-la-capital-de-durango-primera-parte-22224614", platform: "oem.com.mx" },
+            { id: 35, title: "La guerra de encuestas electorales (2da parte)", url: "https://oem.com.mx/elsoldedurango/analisis/la-guerra-deencuestas-electorales-en-la-capital-de-durango-segunda-parte-22258653", platform: "oem.com.mx" },
+            { id: 36, title: "15 insights sobre las elecciones presidenciales en Estados Unidos", url: "https://ceonline.com.mx/post/15-insightssobre-elecciones-presidenciales-en-estados-unidos/", platform: "ceonline.com.mx" },
+            { id: 37, title: "Máximos y mínimos de votación en México", url: "https://flourish-userpreview.com/19156821/DSkgpv_FCxXcGxfGpeiRf3AlFZewR8k9LiOujI03t5GusCm-v9FXsXxhXRN4JRmb/", platform: "flourish" },
+            { id: 38, title: "Reestructuración del voto durante la segunda vuelta en Ecuador", url: "https://flourish-userpreview.com/19171974/SL_E7A4uNx_3DjeERkqxNMhI7B8_tc6E3W9-MPORWTfjSBA5AP9l5g5PiebdD5Ap/", platform: "flourish" },
+            { id: 39, title: "Búsquedas en Google México", url: "https://flourish-userpreview.com/19131946/SCi2k9veLuQHgu4sm9NUyn2vQycX5LlaGZZQ9BkucFJLg3R5i94G_sm3sj1pAcS2/", platform: "flourish" },
+            { id: 40, title: "Comparativa de preferencias entre candidatos", url: "https://flourish-userpreview.com/15977531/m7FDRZiVGSZWGOM9Xwqx1Ky4cXgp03_6JpDpqupPGSfXmcEh_4Q32sYo5AvUTWJe/", platform: "flourish" },
+            { id: 41, title: "Clasificación de notas sobre AMLO en Google", url: "https://flourish-userpreview.com/15413316/i88DnFcnuCxLvWg5XpZ3j24eHU6MgNNQq4hAgKs8jrPZil9pz0nZBwnZ1IkmDIYq/", platform: "flourish" },
+            { id: 42, title: "Mapa en 3D de los resultados de las elecciones presidenciales de Argentina", url: "https://flourish-userpreview.com/15857379/fGQomPASreUeCRHNEX1a60KgYoKrEqt8VBQTyTUhThEdcaWINE7ENZwuVhAwyHR/", platform: "flourish" },
+            { id: 43, title: "Notas relacionadas con AMLO por mes", url: "https://flourish-userpreview.com/15413452/138Hsb3pG1zIfz1YhGn8XZBtXnoMsg_yi7S2G0-9ME7Cvif0L_zr88tcaYh1-EIi/", platform: "flourish" },
+            { id: 44, title: "Clasificación de encuestas en las elecciones de Estados Unidos", url: "https://flourish-userpreview.com/20099801/j3Vvdl20NuyWJNl_mhgRfLXTcuuidZrODEXhaJ1o0kstPHahL30TK_WcZ4eB0yqK/", platform: "flourish" },
+            { id: 45, title: "Agregador de encuestas", url: "https://flourish-user-preview.com/16009674/zO2fOVo03o9AevHlCwwP74uPmHk-SeL5PfBj-IxhJZVtOrOGivjxTHGiBL5OV5d/", platform: "flourish" },
+            { id: 46, title: "Polaridad del PRI en los medios durante 2023", url: "https://flourish-userpreview.com/15645114/yXgmFLJ24BN5W8D20fk26i5wK7Q0OF6DqnMlpuRH6c-HGXVIsGjZa6tfeNEyqGi6/", platform: "flourish" },
+            { id: 47, title: "Resultados electorales en Ecuador 2023", url: "https://x.com/ClickDgo/status/1828506411074023487", platform: "x.com" },
+            { id: 48, title: "Dispersión del voto presidencial en México", url: "https://flourish-userpreview.com/19242195/wEQgVPkVXzeTDPEBDVUYx054uL2aitOtIcOhZ73dNyEfNJsGvkFwyoY7tRrOqB-S/", platform: "flourish" },
+            { id: 49, title: "Redes neuronales en AirBnb (Nueva York)", url: "https://x.com/ClickDgo/status/1871046451721322988/", platform: "x.com" },
+            { id: 50, title: "Comparativa de encuestas según los medios estadounidenses entre Donald Trump y Kamala Harris", url: "https://x.com/ClickDgo/status/1853568470169895075", platform: "x.com" },
+            { id: 51, title: "Segunda causa de fallecimientos en México", url: "https://x.com/ClickDgo/status/1872498741888139277", platform: "x.com" },
+            { id: 52, title: "Grafos aplicados a la incidencia delictiva", url: "https://x.com/ClickDgo/status/1838349108408369217", platform: "x.com" },
+            { id: 53, title: "Elecciones en Venezuela, parroquias ganadas por candidato durante la elección de 2024", url: "https://flourishuserpreview.com/21104330/uLUAj5lLZwJ7QuzriytG5xA3eWsr4Lmd9bfIlLAEoRX1lJBYMZd_ZoPuuFmuCbC-", platform: "flourish" },
+            { id: 54, title: "Votación según tipo de casilla", url: "https://x.com/ClickDgo/status/1828954066015170655", platform: "x.com" }
+        ];
+
+        function renderPortfolio(items) {
+            const grid = document.getElementById('portfolioGrid');
+            grid.innerHTML = '';
+
+            if (items.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-12 text-slate-500 dark:text-slate-400">
+                        <i class="fa-solid fa-folder-open text-4xl mb-3 text-gold600"></i>
+                        <p>No se encontraron proyectos que coincidan con la búsqueda.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            items.forEach(item => {
+                let badgeColor = 'bg-blue-500/10 text-blue-600 dark:text-blue-400';
+                let icon = 'fa-solid fa-link';
+                if (item.platform === 'x.com') {
+                    badgeColor = 'bg-slate-500/10 text-slate-700 dark:text-slate-300';
+                    icon = 'fa-brands fa-x-twitter';
+                } else if (item.platform === 'flourish') {
+                    badgeColor = 'bg-purple-500/10 text-purple-600 dark:text-purple-400';
+                    icon = 'fa-solid fa-chart-pie';
+                } else if (item.platform === 'oem.com.mx' || item.platform === 'ceonline.com.mx') {
+                    badgeColor = 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400';
+                    icon = 'fa-solid fa-newspaper';
+                }
+
+                const card = document.createElement('div');
+                card.className = "bg-white dark:bg-navy800 border border-slate-200 dark:border-slate-700 rounded-3xl p-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group";
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs font-semibold px-3 py-1 rounded-full ${badgeColor}">Proyecto #${item.id}</span>
+                            <i class="${icon} text-slate-400 group-hover:text-gold600 transition-colors"></i>
+                        </div>
+                        <h3 class="text-base font-heading font-bold text-slate-900 dark:text-white mb-4 line-clamp-3">${item.title}</h3>
+                    </div>
+                    <div class="pt-4 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between">
+                        <span class="text-xs text-slate-500 dark:text-slate-400 capitalize">${item.platform.replace('.com.mx','').replace('.com','')}</span>
+                        <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-gold600 dark:text-gold500 hover:underline flex items-center space-x-1.5">
+                            <span>Ver fuente</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                        </a>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterPortfolio() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const platform = document.getElementById('categoryFilter').value;
+
+            const filtered = portfolioData.filter(item => {
+                const matchesQuery = item.title.toLowerCase().includes(query) || item.id.toString() === query;
+                const matchesPlatform = platform === 'all' || item.platform === platform;
+                return matchesQuery && matchesPlatform;
+            });
+
+            renderPortfolio(filtered);
+        }
+
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+        }
+
+        function copyContactInfo() {
+            const contactText = "Email: indicadorel@gmail.com | Teléfono: 618 2 95 82 58 | Perfil: Ingeniero Industrial & Especialista en Análisis de Datos y Estrategia Política.";
+            const dummy = document.createElement('textarea');
+            dummy.value = contactText;
+            document.body.appendChild(dummy);
+            dummy.select();
+            document.execCommand('copy');
+            document.body.removeChild(dummy);
+
+            const toast = document.getElementById('toast');
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Inicializar portafolio al cargar la página
+        window.onload = function() {
+            renderPortfolio(portfolioData);
+        };
+    </script>
+</body>
+</html>
